@@ -58,6 +58,7 @@ def singlePagePref() {
 
         // manage hub details
         if (hubIP) {
+        	log.debug("dynamicPage callback - managing IP")
             fetchHubInfo()
             fetchAllShades()
             fetchAllScenes()
@@ -111,7 +112,7 @@ def singlePagePref() {
                         required: false
                     )
                 } else {
-                    paragraph "Searching for installed scene collections..."
+                    paragraph "Searching for installed scene collectionss..."
                 }
             }
 		}
@@ -201,7 +202,9 @@ def fetchHubInfo() {
  * Handles base hub info response
  */
 def _fetchHubInfoCallback(response) {
+	log.debug("_fetchHubInfoCallback(response=${response})")
     def userData = response.json.userData
+    log.debug("_fetchHubInfoCallback(userData=${userData})")
     state.hubName = new String(userData.hubName.decodeBase64())
     state.hubMAC = userData.macAddress.replaceAll(":", "")
     log.info("_fetchHubInfoCallback(status=${response.status}) hubName=${state.hubName} hubMAC=${state.hubMAC}")
@@ -427,7 +430,7 @@ def installShade(enumLabel) {
     if (!dev) {
         def addedDevice = addChildDevice(
             "johnvey", 
-            "Hunter Douglas PowerView Shade", 
+            "Luxaflex PowerView Shade", 
             shadeInfo.deviceNetworkId,
             getHubID(),
             [name: shadeInfo.id, label: shadeInfo.label, completedSetup: true]
