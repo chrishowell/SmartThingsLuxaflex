@@ -25,7 +25,8 @@ metadata {
     definition (
         name: "Hunter Douglas PowerView Scene", 
         namespace: "johnvey", 
-        author: "Johnvey Hwang"
+        author: "Johnvey Hwang",
+        vid: "generic-shade"
     ) {
         // tags
         capability "Actuator"
